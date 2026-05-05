@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>مطعم شام  </title>
+    <style>
+        body {
+            font-family: Arial, 'Segoe UI', sans-serif;
+            background: #f2eaff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            background-color: #6a0dad;
+            padding: 12px;
+            text-align: center;
+            border-radius: 30px;
+            margin-bottom: 25px;
+        }
+
+            .navbar a {
+                color: white;
+                text-decoration: none;
+                margin: 0 12px;
+                padding: 6px 16px;
+                background-color: #8a2be2;
+                border-radius: 25px;
+                display: inline-block;
+                font-weight: bold;
+            }
+
+                .navbar a:hover {
+                    background-color: #4a0080;
+                }
+
+        h1 {
+            text-align: center;
+            color: #4a0080;
+        }
+
+        .summary-box {
+            background: #faf5ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #d9c5ff;
+        }
+
+            .summary-box h2 {
+                color: #6a0dad;
+                margin-top: 0;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #9b7bcb;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #6a0dad;
+            color: white;
+        }
+
+        .btn {
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary {
+            background-color: #ffb347;
+            color: #2c1a4a;
+        }
+
+        .btn:hover {
+            background-color: #4a0080;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="home.html">🏠 الرئيسية</a>
+            <a href="aboutus.html">📖 من نحن</a>
+            <a href="menu.html">🍽️ الوجبات</a>
+            <a href="summary.html" style="background-color:#ffb347; color:#2c1a4a;">📋 ملخص الطلب</a>
+        </div>
+
+        <h1>📋 ملخص طلبك</h1>
+
+        <div id="summaryContent" class="summary-box">
+            <p style="text-align:center;">جاري تحميل البيانات...</p>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="menu.html" class="btn btn-secondary">✏️ تعديل الطلب</a>
+            <button id="confirmBtn" class="btn">✅ تأكيد الطلب وإرساله</button>
+      
+
+    <script>
+    function displaySummary() {
+        const selectedMeals = JSON.parse(localStorage.getItem('selectedMeals')) || [];
+        const customerData = JSON.parse(localStorage.getItem('customerData')) || {};
+
+        if (selectedMeals.length === 0) {
+            document.getElementById('summaryContent').innerHTML = `
+                <div style="text-align:center; color:red;">
+                    <p>لا توجد وجبات مختارة. الرجاء العودة إلى <a href="menu.html">صفحة الوجبات</a> واختيار وجبات.</p>
+                </div>
+            `;
+            return;
+        }
+
+        // بناء جدول الوجبات المختارة
+        let mealsTable = `
+            <h2>🍽️ الوجبات التي اخترتها</h2>
+            <table>
+                <thead>
+                    <tr><th>الوجبة</th><th>الكمية (افتراضي 1)</th></tr>
+                </thead>
+                <tbody>
+        `;
+        selectedMeals.forEach(meal => {
+            mealsTable += `<tr><td>${meal}</td><td>1</td></tr>`;
+        });
+        mealsTable += `</tbody></table>`;
+
+        // معلومات الزبون
+        let customerInfo = `
+            <h2>👤 معلوماتك الشخصية</h2>
+            <ul style="list-style:none; padding-right:0;">
+                <li><strong>الاسم الكامل:</strong> ${customerData.fullName || 'غير مدخل'}</li>
+                <li><strong>رقم الحساب المصرفي:</strong> ${customerData.bankAccount || 'غير مدخل'}</li>
+                <li><strong>تاريخ الولادة:</strong> ${customerData.birthDate || 'غير مدخل'}</li>
+                <li><strong>رقم الموبايل:</strong> ${customerData.mobile || 'غير مدخل'}</li>
+            </ul>
+        `;
+
+        document.getElementById('summaryContent').innerHTML = mealsTable + customerInfo;
+    }
+
+    // زر التأكيد النهائي
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+        alert('تم إرسال طلبك بنجاح! شكراً لك. سيتم التواصل معك قريباً.');
+        // مسح البيانات المخزنة (اختياري)
+        localStorage.removeItem('selectedMeals');
+        localStorage.removeItem('customerData');
+        // يمكن توجيه المستخدم للصفحة الرئيسية
+        window.location.href = 'home.html';
+    });
+
+    // تنفيذ العرض
+    displaySummary();
+    </script>
+</body>
+</html>

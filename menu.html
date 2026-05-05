@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>قائمة الوجبات - مطعم شام  </title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2eaff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            background-color: #6a0dad;
+            padding: 10px;
+            text-align: center;
+            border-radius: 30px;
+            margin-bottom: 25px;
+        }
+
+            .navbar a {
+                color: white;
+                text-decoration: none;
+                margin: 0 10px;
+                padding: 5px 15px;
+                background-color: #8a2be2;
+                border-radius: 25px;
+                display: inline-block;
+                font-weight: bold;
+            }
+
+                .navbar a.active {
+                    background-color: #ffb347;
+                    color: #2c1a4a;
+                }
+
+        h1 {
+            text-align: center;
+            color: #4a0080;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #9b7bcb;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #6a0dad;
+            color: white;
+        }
+
+        .details-row {
+            display: none;
+            background-color: #f9f2ff;
+        }
+
+            .details-row td {
+                text-align: right;
+                padding: 12px;
+            }
+
+        .meal-img {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+
+            .btn:hover {
+                background-color: #4a0080;
+            }
+
+        .order-form {
+            background: #faf5ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid #d9c5ff;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+            .form-group label {
+                display: inline-block;
+                width: 180px;
+                font-weight: bold;
+            }
+
+            .form-group input {
+                padding: 5px;
+                width: 220px;
+                border-radius: 6px;
+                border: 1px solid #aaa;
+            }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-right: 190px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="navbar">
+            <a href="home.html">🏠 الرئيسية</a>
+            <a href="aboutus.html">📖 من نحن</a>
+            <a href="menu.html" class="active">🍽️ الوجبات</a>
+            <a href="summary.html">📋 ملخص الطلب</a>
+        </div>
+
+        <h1>🍽️ قائمة الطعام</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>الرمز</th>
+                    <th>الوجبة</th>
+                    <th>السعر (ل.س)</th>
+                    <th>إظهار التفاصيل</th>
+                    <th>اختيار</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- وجبة 1 -->
+                <tr>
+                    <td>SF-001</td>
+                    <td>سمك بوري مشوي لشخصين</td>
+                    <td>110,000</td>
+                    <td><input type="checkbox" class="detail-cb" data-target="detail1"></td>
+                    <td><input type="checkbox" class="select-meal" value="SF-001 - سمك بوري مشوي"></td>
+                </tr>
+                <tr id="detail1" class="details-row">
+                    <td colspan="5">
+                        <div class="meal-img">🐟</div>
+                        <strong>المطبخ:</strong> مصري<br>
+                        <strong>تصنيف:</strong> مأكولات بحرية<br>
+                        <strong>المكونات:</strong> 4 سمكات بوري، ثوم، فلفل، طماطم، ليمون، زيت زيتون.
+                    </td>
+                </tr>
+                <!-- وجبة 2 -->
+                <tr>
+                    <td>SF-002</td>
+                    <td>شيش طاووق مع أرز برياني</td>
+                    <td>85,000</td>
+                    <td><input type="checkbox" class="detail-cb" data-target="detail2"></td>
+                    <td><input type="checkbox" class="select-meal" value="SF-002 - شيش طاووق مع أرز برياني"></td>
+                </tr>
+                <tr id="detail2" class="details-row">
+                    <td colspan="5">
+                        <div class="meal-img">🍗</div>
+                        <strong>المطبخ:</strong> شرق أوسطي<br>
+                        <strong>تصنيف:</strong> مشاوي<br>
+                        <strong>المكونات:</strong> صدور دجاج، بهارات، زبادي، أرز بسمتي، زبيب، مكسرات.
+                    </td>
+                </tr>
+                <!-- وجبة 3 -->
+                <tr>
+                    <td>SF-003</td>
+                    <td>مقبلات مشكلة (حمص، متبل، ورق عنب)</td>
+                    <td>45,000</td>
+                    <td><input type="checkbox" class="detail-cb" data-target="detail3"></td>
+                    <td><input type="checkbox" class="select-meal" value="SF-003 - مقبلات مشكلة"></td>
+                </tr>
+                <tr id="detail3" class="details-row">
+                    <td colspan="5">
+                        <div class="meal-img">🥙</div>
+                        <strong>المطبخ:</strong> سوري<br>
+                        <strong>تصنيف:</strong> مقبلات<br>
+                        <strong>المكونات:</strong> حمص، طحينة، باذنجان مشوي، رمان، ورق عنب محشي.
+                    </td>
+                </tr>
+                <!-- وجبة 4 -->
+                <tr>
+                    <td>SF-004</td>
+                    <td>باستا ألفريدو بالدجاج</td>
+                    <td>70,000</td>
+                    <td><input type="checkbox" class="detail-cb" data-target="detail4"></td>
+                    <td><input type="checkbox" class="select-meal" value="SF-004 - باستا ألفريدو بالدجاج"></td>
+                </tr>
+                <tr id="detail4" class="details-row">
+                    <td colspan="5">
+                        <div class="meal-img">🍝</div>
+                        <strong>المطبخ:</strong> إيطالي<br>
+                        <strong>تصنيف:</strong> باستا<br>
+                        <strong>المكونات:</strong> باستا فيتوتشيني، صوص ألفريدو، دجاج، مشروم، بقدونس.
+                    </td>
+                </tr>
+                <!-- وجبة 5 -->
+                <tr>
+                    <td>SF-005</td>
+                    <td>بيتزا مارجريتا</td>
+                    <td>55,000</td>
+                    <td><input type="checkbox" class="detail-cb" data-target="detail5"></td>
+                    <td><input type="checkbox" class="select-meal" value="SF-005 - بيتزا مارجريتا"></td>
+                </tr>
+                <tr id="detail5" class="details-row">
+                    <td colspan="5">
+                        <div class="meal-img">C:\Users\Aran\Desktop\kkk</div>
+                        <strong>المطبخ:</strong> إيطالي<br>
+                        <strong>تصنيف:</strong> بيتزا<br>
+                        <strong>المكونات:</strong> عجينة، صلصة طماطم، جبن موزاريلا، ريحان، زيت زيتون.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="text-align: center;">
+            <button id="proceedBtn" class="btn">متابعة</button>
+        </div>
+
+        <div id="orderFormDiv" class="order-form">
+            <h3>نموذج الطلب</h3>
+            <div class="form-group">
+                <label>الاسم الكامل (بالإنجليزية):</label>
+                <input type="text" id="fullName" placeholder="ali issa">
+                <div id="nameError" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label>رقم الحساب المصرفي (6 أرقام):</label>
+                <input type="text" id="bankAccount" maxlength="6" placeholder="******">
+                <div id="accountError" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label>رقم الموبايل:</label>
+                <input type="text" id="mobile" placeholder="********09">
+                <div id="mobileError" class="error"></div>
+            </div>
+            <div style="text-align: center;">
+                <button id="submitBtn" class="btn">إرسال الطلب</button>
+            </div>
+            <div id="formMessage" style="text-align:center;"></div>
+    <script>
+        // إظهار/إخفاء تفاصيل الوجبة
+        const detailCheckboxes = document.querySelectorAll('.detail-cb');
+        detailCheckboxes.forEach(cb => {
+            cb.addEventListener('change', function () {
+                const targetId = this.getAttribute('data-target');
+                const detailRow = document.getElementById(targetId);
+                detailRow.style.display = this.checked ? 'table-row' : 'none';
+            });
+        });
+
+        // زر متابعة: يظهر النموذج فقط إذا اختار وجبة
+        const proceedBtn = document.getElementById('proceedBtn');
+        const orderFormDiv = document.getElementById('orderFormDiv');
+        proceedBtn.addEventListener('click', () => {
+            const anySelected = document.querySelectorAll('.select-meal:checked').length > 0;
+            if (!anySelected) {
+                alert('الرجاء اختيار وجبة واحدة على الأقل');
+                return;
+            }
+            orderFormDiv.style.display = 'block';
+            orderFormDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // تحقق من صحة المدخلات وحفظ البيانات
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+
+        function validateForm() {
+            let valid = true;
+            const name = document.getElementById('fullName').value.trim();
+            if (!/^[A-Za-z]+ [A-Za-z]+$/.test(name)) {
+                document.getElementById('nameError').innerText = 'اسم + كنيه بالانكليزية (مسافة واحدة)';
+                valid = false;
+            } else document.getElementById('nameError').innerText = '';
+
+            const acc = document.getElementById('bankAccount').value.trim();
+            if (!/^\d{6}$/.test(acc)) {
+                document.getElementById('accountError').innerText = '6 أرقام فقط (مثال: 055555)';
+                valid = false;
+            } else document.getElementById('accountError').innerText = '';
+
+            const mobile = document.getElementById('mobile').value.trim();
+            if (!/^09\d{8}$/.test(mobile)) {
+                document.getElementById('mobileError').innerText = 'يبدأ بـ 09 ويتكون من 10 أرقام';
+                valid = false;
+            } else document.getElementById('mobileError').innerText = '';
+
+            return valid;
+        }
+
+        submitBtn.addEventListener('click', () => {
+            if (validateForm()) {
+                const selectedMeals = Array.from(document.querySelectorAll('.select-meal:checked')).map(cb => cb.value);
+                const customerData = {
+                    fullName: document.getElementById('fullName').value.trim(),
+                    bankAccount: document.getElementById('bankAccount').value.trim(),
+                    mobile: document.getElementById('mobile').value.trim()
+                };
+                localStorage.setItem('selectedMeals', JSON.stringify(selectedMeals));
+                localStorage.setItem('customerData', JSON.stringify(customerData));
+                window.location.href = 'summary.html';
+            } else {
+                formMessage.innerHTML = '❌ يرجى تصحيح الأخطاء';
+                formMessage.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
